@@ -72,3 +72,50 @@ function calcularNotaFinal(examen, practiques, actitud) {
   // Examen 60%, Pràctiques 30%, Actitud 10%
   return (examen * 0.6) + (practiques * 0.3) + (actitud * 0.1);
 }
+
+function afegirAlumne(nom, examen, practiques, actitud) {
+  // Creem l'objecte alumne
+  var alumne = {
+    nom:        nom,
+    examen:     examen,
+    practiques: practiques,
+    actitud:    actitud,
+    notaFinal:  calcularNotaFinal(examen, practiques, actitud)
+  };
+
+  // Afegim l'objecte a l'array
+  alumnes.push(alumne);
+
+  // Missatge d'èxit
+  mostrarMissatge('Alumne "' + alumne.nom + '" afegit correctament.', 'correcte');
+
+  // Netejem el formulari
+  formulari.reset();
+
+  // Actualitzem la taula
+  mostrarAlumnes();
+}
+
+function mostrarAlumnes() {
+  // Buidem la taula abans de tornar a pintar
+  cosTaula.innerHTML = '';
+
+  for (var i = 0; i < alumnes.length; i++) {
+    var alumne = alumnes[i];
+    var estat  = alumne.notaFinal >= 5 ? 'Aprovat' : 'Suspès';
+    var cls    = alumne.notaFinal >= 5 ? 'aprovat' : 'suspes';
+
+    var fila = `
+      <tr>
+        <td>${alumne.nom}</td>
+        <td>${alumne.examen.toFixed(2)}</td>
+        <td>${alumne.practiques.toFixed(2)}</td>
+        <td>${alumne.actitud.toFixed(2)}</td>
+        <td>${alumne.notaFinal.toFixed(2)}</td>
+        <td class="${cls}">${estat}</td>
+      </tr>
+    `;
+
+    cosTaula.innerHTML += fila;
+  }
+}
