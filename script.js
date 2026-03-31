@@ -62,3 +62,13 @@ function validarFormulari(event) {
 
 // Canviem l'event del formulari per cridar validarFormulari()
 formulari.addEventListener('submit', validarFormulari);
+
+function mostrarMissatge(text, tipus) {
+  missatge.textContent = text;
+  missatge.className = tipus; // 'error' o 'correcte'
+}
+
+function calcularNotaFinal(examen, practiques, actitud) {
+  // Examen 60%, Pràctiques 30%, Actitud 10%
+  return (examen * 0.6) + (practiques * 0.3) + (actitud * 0.1);
+}
