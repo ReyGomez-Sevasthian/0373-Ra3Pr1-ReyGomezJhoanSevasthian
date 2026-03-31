@@ -119,3 +119,19 @@ function mostrarAlumnes() {
     cosTaula.innerHTML += fila;
   }
 }
+function ordenarAlumnes(ordre) {
+  if (alumnes.length === 0) {
+    mostrarMissatge('No hi ha alumnes per ordenar.', 'error');
+    return;
+  }
+
+  alumnes.sort(function(a, b) {
+    if (ordre === 'asc') {
+      return a.notaFinal - b.notaFinal;
+    } else {
+      return b.notaFinal - a.notaFinal;
+    }
+  });
+
+  mostrarAlumnes();
+}
